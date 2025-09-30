@@ -7,6 +7,7 @@ const cors = require("cors"); // Middleware to enable Cross-Origin Resource Shar
 const connectDB = require("./config/db"); // Custom module to connect to the MongoDB database
 const userRoutes = require("./routes/userRoutes"); // Router for user-related endpoints
 const { errorHandler } = require("./middleware/errorMiddleware"); // Custom error handling middleware
+const swaggerDocs = require("./swagger");
 
 // Initialize the Express application
 const app = express();
@@ -25,6 +26,9 @@ app.use(express.json()); // parse JSON bodies
 // --- Routes ---
 // Mount the userRoutes for any requests starting with "/users"
 app.use("/users", userRoutes);
+
+// --- Swagger Docs ---
+swaggerDocs(app);
 
 // --- Health-check endpoint ---
 // A simple route to check if the API is running and responding to requests
